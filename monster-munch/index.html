@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster Munch</title>
+    <!-- Link to the CSS file for styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main container for the entire game scene -->
+    <div id="game-container">
+
+        <!-- Container for the food item and its associated word -->
+        <div id="food-container">
+            <!-- The word to be typed will be displayed here.
+                 JavaScript will populate this with individual <span> elements for each letter
+                 to allow for per-letter styling (e.g., changing color on correct keypress). -->
+            <div id="word-display"></div>
+
+            <!-- The visual representation of the food item (e.g., cookie, apple).
+                 Its appearance will be changed by JavaScript. -->
+            <div id="food-item"></div>
+        </div>
+
+        <!-- The monster character.
+             Its state (idle, eating, satisfied) will be controlled by adding/removing CSS classes. -->
+        <div id="monster">
+            <div id="monster-mouth"></div>
+        </div>
+
+    </div>
+
+    <!-- Audio elements for sound effects and music.
+         Including them in the HTML allows for preloading, which reduces delay during gameplay.
+         The 'src' attributes are placeholders and should point to your actual sound files. -->
+    <audio id="sfx-correct-key" src="sounds/pop.wav" preload="auto"></audio>
+    <audio id="sfx-eat" src="sounds/crunch.wav" preload="auto"></audio>
+    <audio id="sfx-satisfied" src="sounds/sigh.wav" preload="auto"></audio>
+    <audio id="bgm-music" src="sounds/music.mp3" loop preload="auto"></audio>
+
+    <!-- Link to the JavaScript file for all game logic -->
+    <script src="script.js"></script>
+
+</body>
+</html>
