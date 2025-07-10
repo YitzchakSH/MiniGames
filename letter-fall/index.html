@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Catch</title>
+    <!-- This line links your HTML to your CSS file for styling. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="main-content">
+        <!-- This container will hold the dynamic keyboard display. -->
+        <div id="keyboard-container"></div>
+    
+        <!-- This is the main container for the game screen. -->
+        <div id="game-container">
+            <!-- The player element. -->
+            <div id="player"></div>
+    
+            <!-- Falling letters will be created by JavaScript and added inside this container. -->
+        </div>
+    </div>
+
+    <!-- This container holds the game's UI elements like the score. -->
+    <div id="ui-container">
+        <p>Score: <span id="score">0</span></p>
+    </div>
+
+    <!-- This is the initial screen with the start button. It will overlay the game. -->
+    <div id="start-screen">
+        <h1>Letter Catch</h1>
+        <p>Use the LEFT and RIGHT arrow keys to move.</p>
+        <p>Press the matching letter on your keyboard to shoot it!</p>
+        <div id="language-selection-div">
+            <p>Choose your language to begin:</p>
+            <button id="start-english">English</button>
+            <button id="start-hebrew">Hebrew</button>
+        </div>
+        <div id="difficulty-selection-div" style="display: none;">
+            <p>Choose your difficulty:</p>
+            <button id="difficulty-easy">Easy</button>
+            <button id="difficulty-normal">Normal</button>
+            <button id="difficulty-hard">Hard</button>
+        </div>
+    </div>
+    
+    <!-- This screen will appear when the game is over. It's hidden by default. -->
+    <div id="game-over-screen" style="display: none;">
+        <h2>Game Over</h2>
+        <p>Your final score: <span id="final-score">0</span></p>
+        <button id="restart-button">Play Again</button>
+    </div>
+
+    <!-- This line links your HTML to your JavaScript file for game logic.
+         The 'defer' attribute makes the script wait until the HTML page has been fully loaded. -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+/* --- Basic Setup & Typography --- */
+
+/* Use a border-box model for easier layout calculations */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrollbars on the game page */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif; /* Child-friendly fonts */
+    background-color: #87CEEB; /* A friendly sky blue background */
+}
+
+/* --- Main Game Layout --- */
+
+#game-container {
+    display: flex;
+    justify-content: space-between; /* Pushes monster and food to opposite sides */
+    align-items: center; /* Vertically centers the items */
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    position: relative; /* Needed for absolute positioning of animations */
+}
+
+/* --- Monster Styling & States --- */
+
+#monster {
+    width: 200px;
+    height: 200px;
+    background-color: #9370DB; /* A friendly medium purple */
+    border-radius: 50% 50% 40% 40%; /* A soft, non-perfect circle shape */
+    position: relative; /* For positioning eyes and mouth */
+    transition: transform 0.3s ease-in-out; /* Smooth transitions for animations */
+}
+
+/* Simple eyes for the monster */
+#monster::before, #monster::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    top: 60px;
+    border: 4px solid #333;
+}
+
+#monster::before {
+    left: 45px;
+}
+
+#monster::after {
+    right: 45px;
+}
+
+/* The monster's mouth */
+#monster-mouth {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background-color: #4B0082; /* A dark indigo */
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 80px 80px; /* Makes a "U" shape */
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy transition */
+}
+
+/* --- Monster States --- */
+
+/* "Ready-to-Eat" state: mouth opens wide */
+#monster.ready-to-eat #monster-mouth {
+    width: 100px;
+    height: 80px;
+    bottom: 25px;
+}
+
+/* "Satisfied" state: a little bounce and a chomp */
+#monster.satisfied {
+    animation: satisfied-bounce 0.5s ease;
+}
+
+#monster.satisfied #monster-mouth {
+    animation: chomp 0.5s ease;
+}
+
+@keyframes satisfied-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes chomp {
+    0%, 100% { transform: translateX(-50%) scaleY(1); }
+    50% { transform: translateX(-50%) scaleY(0.1); }
+}
+
+/* --- Food & Word Styling --- */
+
+#food-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* The animation will control the position when the word is complete */
+    transition: opacity 0.3s ease;
+}
+
+#food-item {
+    width: 100px;
+    height: 100px;
+    background-color: #D2691E; /* A cookie-like brown */
+    background-image: radial-gradient(#603813 15%, transparent 16%); /* Chocolate chips */
+    background-size: 25px 25px;
+    border-radius: 50%;
+    border: 5px solid #A0522D;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Animation for the food traveling to the monster */
+.food-travel {
+    position: absolute; /* Take it out of the normal flow to animate its position */
+    animation: travel-to-monster 1s ease-in forwards;
+}
+
+@keyframes travel-to-monster {
+    0% {
+        /* Starts at the initial food position */
+        left: 40px;
+        top: 50%;
+        transform: translateY(-50%) scale(1);
+        opacity: 1;
+    }
+    30% {
+        /* Arc up */
+        top: 30%;
+        transform: translateY(-50%) scale(1.1);
+    }
+    100% {
+        /* Ends inside the monster's general area */
+        left: calc(100% - 180px);
+        top: 50%;
+        transform: translateY(-50%) scale(0.2);
+        opacity: 0;
+    }
+}
+
+
+/* --- Word Display Styling --- */
+
+#word-display {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    color: #a0a0a0; /* Default color for untyped letters */
+    min-height: 80px; /* Prevent layout shift for words of different lengths */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for each individual letter span inside the word display */
+#word-display span {
+    transition: color 0.2s ease;
+}
+
+/* Class added by JavaScript to a letter that has been correctly typed */
+#word-display span.correct {
+    color: #228B22; /* Forest Green */
+}
+
+/* Class for incorrect keypress feedback */
+#word-display.error {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}

@@ -1,0 +1,184 @@
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    flex-direction: column; /* Stack the game container and UI vertically */
+    overflow: hidden; /* Prevents scrollbars if game is large */
+}
+
+/* A wrapper to hold the keyboard and game container side-by-side */
+#main-content {
+    display: flex;
+    align-items: center; /* Vertically align the items */
+    gap: 20px; /* Creates space between the keyboard and the game */
+}
+
+/* Game Container - The main play area */
+#game-container {
+    width: 800px;
+    height: 600px;
+    border: 3px solid #333;
+    background-color: #87CEEB; /* A nice sky blue background */
+    position: relative; /* This is crucial for positioning the player and letters inside */
+    overflow: hidden; /* Hides letters that fall past the bottom */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Player (The boy with the basket) */
+#player {
+    width: 60px;
+    height: 80px;
+    /* A simple brown color for the basket. You could replace this with an image. */
+    /* e.g., background-image: url('images/boy-with-basket.png'); */
+    background-color: #A0522D; 
+    border: 2px solid #5a2d0c;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: absolute;
+    bottom: 0;
+    /* The 'left' position will be controlled by JavaScript */
+    /* The transition is removed for smoother frame-by-frame movement controlled by JS */
+}
+
+/* This class will be added to letters created by JavaScript */
+.letter {
+    width: 40px;
+    height: 40px;
+    background-color: #FFD700; /* Gold color for the letters */
+    color: #333;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px; /* Vertically centers the text inside the box */
+    position: absolute;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    /* The 'top' and 'left' positions will be set by JavaScript */
+}
+
+/* Style for Hebrew letters to ensure proper font rendering */
+.letter[lang="he"] {
+    font-family: 'Arial', 'David', 'sans-serif-hebrew', sans-serif;
+    font-size: 26px; /* Adjust size for better visibility */
+}
+
+/* The container for the on-screen keyboard */
+#keyboard-container {
+    padding: 10px;
+    background-color: #dcdcdc;
+    border: 3px solid #333;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.keyboard-key {
+    flex: 1; /* Allows keys to fill the row space evenly */
+    min-width: 30px; /* Ensures keys don't get too small */
+    height: 40px;
+    background-color: #f9f9f9;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    transition: background-color 0.1s linear, color 0.1s linear;
+}
+
+/* This class will be for the projectiles shot by the player */
+.projectile {
+    width: 25px;
+    height: 25px;
+    background-color: #ff6347; /* A nice "Tomato" red color */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 25px;
+    position: absolute;
+    border-radius: 50%; /* Make it a circle */
+    box-shadow: 0 0 8px #ff4500;
+    /* The 'top' and 'left' positions will be set by JavaScript */
+}
+
+/* UI Container for Score */
+#ui-container {
+    margin-top: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Overlay Screens (Start and Game Over) */
+#start-screen, #game-over-screen {
+    position: absolute;
+    /* These values make the overlay cover the entire game container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+    color: white;
+    /* Flexbox is used to easily center the content */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10; /* Ensures the overlay is on top of other game elements */
+}
+
+/* Styling for text and titles inside the overlays */
+#start-screen h1, #game-over-screen h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+#start-screen p, #game-over-screen p {
+    font-size: 20px;
+    margin: 10px 0;
+    max-width: 80%;
+}
+
+#language-selection-div, #difficulty-selection-div {
+    margin-top: 20px;
+}
+
+#language-selection-div button, #difficulty-selection-div button {
+    margin: 0 10px;
+}
+
+
+/* General Button Styling */
+button {
+    padding: 15px 30px;
+    font-size: 22px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #4CAF50; /* A friendly green color */
+    color: white;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049; /* A slightly darker green on hover */
+}
